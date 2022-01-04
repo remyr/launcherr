@@ -31,7 +31,7 @@ export const Input = <TFormValues extends Record<string, unknown>>({
           {...props}
           id={name}
           name={name}
-          className="bg-white focus:ring-slate-500 focus:border-slate-500 block w-full px-4 sm:text-sm border py-2 border-gray-300 rounded-md text-slate-700 focus:outline-none"
+          className="bg-white focus:ring-slate-500 focus:border-slate-500  focus:ring-1 block w-full px-4 sm:text-sm border py-2 border-gray-300 rounded-md text-slate-700 focus:outline-none"
           {...(register && register(name, rules))}
         />
       </div>

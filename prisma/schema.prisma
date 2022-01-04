@@ -23,6 +23,6 @@ model Link {
   iconUrl    String
   href       String
   order      Int
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId Int
 }

@@ -20,8 +20,9 @@ export const AddCategoryModal: FC = () => {
 
   return (
     <Modal
-      isOpen={modals.createCategoryOpen}
       title="Create a category"
+      confirmLabel="Create"
+      isOpen={modals.createCategoryOpen}
       onClose={closeCreateCategoryModal}
       onConfirm={onSubmit}>
       <form onSubmit={onSubmit} className="mt-4">

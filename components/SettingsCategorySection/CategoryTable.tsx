@@ -4,9 +4,11 @@ import { PencilIcon, TrashIcon } from '@heroicons/react/outline';
 import { FC } from 'react';
 import { useStore } from '../../lib/store';
 
-interface CategoryTableProps {}
+interface CategoryTableProps {
+  remove: (id: number) => void;
+}
 
-export const CategoryTable: FC<CategoryTableProps> = () => {
+export const CategoryTable: FC<CategoryTableProps> = ({ remove }) => {
   const { categories } = useStore();
 
   return (
@@ -45,7 +47,9 @@ export const CategoryTable: FC<CategoryTableProps> = () => {
                       <button className="group">
                         <PencilIcon className="h-5 w-5 text-slate-500 transition duration-300 group-hover:scale-110 dark:text-slate-300" />
                       </button>
-                      <button className="group">
+                      <button
+                        onClick={() => remove(category.id)}
+                        className="group">
                         <TrashIcon className="h-5 w-5 text-slate-500 transition duration-300 group-hover:scale-110 dark:text-slate-300" />
                       </button>
                     </p>

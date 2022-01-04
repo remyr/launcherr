@@ -15,6 +15,7 @@ interface Store {
   openCreateLinkModal: () => void;
   closeCreateLinkModal: () => void;
   createCategory: (payload: CreateCategryDTO) => void;
+  removeCategory: (categoryId: number) => void;
 }
 
 export const useStore = create<Store>((set) => ({
@@ -24,7 +25,7 @@ export const useStore = create<Store>((set) => ({
     createCategoryOpen: false,
     createLinkOpen: false,
   },
-  // Methods
+  // Modal Controls
   openCreateCategoryModal: () => {
     set((state) => ({ modals: { ...state.modals, createCategoryOpen: true } }));
   },
@@ -41,6 +42,7 @@ export const useStore = create<Store>((set) => ({
       modals: { ...state.modals, createLinkOpen: false },
     }));
   },
+  // Category
   createCategory: async (payload) => {
     const { data } = await axios.post('/api/category', payload);
 
@@ -51,6 +53,18 @@ export const useStore = create<Store>((set) => ({
         createCategoryOpen: false,
       },
     }));
+  },
+  removeCategory: async (categoryId: number) => {
+    await axios.delete(`/api/category/${categoryId}`);
+
+    set((state) => {
+      return {
+        categories: [
+          ...state.categories.filter((category) => category.id !== categoryId),
+        ],
+        links: state.links.filter((link) => link.categoryId !== categoryId),
+      };
+    });
   },
 }));
 
