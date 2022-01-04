@@ -1,4 +1,6 @@
 import { Category, Link } from '@prisma/client';
+import axios from 'axios';
+import { CreateCategryDTO } from 'types/dto';
 import create from 'zustand';
 
 interface Store {
@@ -12,6 +14,7 @@ interface Store {
   closeCreateCategoryModal: () => void;
   openCreateLinkModal: () => void;
   closeCreateLinkModal: () => void;
+  createCategory: (payload: CreateCategryDTO) => void;
 }
 
 export const useStore = create<Store>((set) => ({
@@ -36,6 +39,17 @@ export const useStore = create<Store>((set) => ({
   closeCreateLinkModal: () => {
     set((state) => ({
       modals: { ...state.modals, createLinkOpen: false },
+    }));
+  },
+  createCategory: async (payload) => {
+    const { data } = await axios.post('/api/category', payload);
+
+    set((state) => ({
+      categories: [...state.categories, data],
+      modals: {
+        ...state.modals,
+        createCategoryOpen: false,
+      },
     }));
   },
 }));
