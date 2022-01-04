@@ -16,7 +16,8 @@ interface IndexProps {
 
 const IndexPage: FC<IndexProps> = ({ categories }) => {
   return (
-    <div className="px-24 grid grid-cols-4 gap-8 mt-8">
+    <div className="px-4 grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      {/* <div className="px-24 grid grid-cols-1 gap-8 mt-8"> */}
       {categories.map((category) => (
         <CategoryColumn
           key={`category-${category.id}`}

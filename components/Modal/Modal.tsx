@@ -32,7 +32,7 @@ export const Modal: FC<ModalProps> = ({
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
             leaveTo="opacity-0">
-            <Dialog.Overlay className="fixed inset-0" />
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30 dark:bg-white dark:opacity-5" />
           </Transition.Child>
 
           <span

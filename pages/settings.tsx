@@ -7,7 +7,7 @@ import { SettingsLinkSection } from '@component/SettingsLinkSection';
 
 const Settings: FC = () => {
   return (
-    <div className="flex flex-col w-6/12 mx-auto mt-8 space-y-8">
+    <div className="flex flex-col mt-8 space-y-8 w-11/12 xl:w-6/12 mx-auto">
       <SettingsCategorySection />
       <SettingsLinkSection />
     </div>

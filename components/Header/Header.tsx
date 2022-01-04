@@ -38,19 +38,19 @@ export const Header = () => {
   }, []);
 
   return (
-    <div className="w-full flex bg-white dark:bg-slate-800 py-4 px-24 shadow justify-between items-center">
+    <div className="w-full flex bg-white dark:bg-slate-800 py-4 p-4 shadow justify-between items-center xl:px-24">
       <Link href="/">
         <a className="text-3xl font-bold text-slate-800 dark:text-slate-100 hover:cursor-pointer">
           Launcherr
         </a>
       </Link>
       <div className="flex space-x-4">
-        <div className="flex items-center text-xs bg-slate-200 rounded-xl px-2 dark:bg-slate-900 dark:text-slate-200 min-w-[140px] justify-center">
+        <div className="hidden items-center text-xs bg-slate-200 rounded-xl px-2 dark:bg-slate-900 dark:text-slate-200 min-w-[140px] justify-center lg:flex">
           <p>
             CPU Usage: <span className="font-semibold">{systemInfo.cpu}%</span>
           </p>
         </div>
-        <div className="flex items-center text-xs bg-slate-200 rounded-xl px-2 dark:bg-slate-900 dark:text-slate-200 min-w-[140px] justify-center">
+        <div className="hidden items-center text-xs bg-slate-200 rounded-xl px-2 dark:bg-slate-900 dark:text-slate-200 min-w-[140px] justify-center lg:flex">
           <p>
             Free memory:{' '}
             <span className="font-semibold">
