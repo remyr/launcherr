@@ -6,37 +6,10 @@ import axios from 'axios';
 import { AddCategoryModal } from '../components/AddCategoryModal';
 import { CategoryTable, LinkTable } from '../components/Table';
 import { AddLinkModal } from '../components/AddLinkModal';
+import { useStore } from '../lib/store';
 
-interface SettingsProps {
-  categories: Category[];
-  links: Array<Link & { category: { name: string } }>;
-}
-
-const Settings: FC<SettingsProps> = ({
-  categories: categoriesData,
-  links: linkData,
-}) => {
-  const [addCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
-  const [addLinkModalOpen, setAddLinkModalOpen] = useState(false);
-  const [categories, setCategories] = useState<Category[]>(categoriesData);
-  const [links, setLink] =
-    useState<Array<Link & { category: { name: string } }>>(linkData);
-
-  const handleCategoryCreate = async (name: string) => {
-    const { data: categoryCreated } = await axios.post('/api/category', {
-      name,
-    });
-
-    setCategories((oldValues) => [...oldValues, categoryCreated]);
-    setAddCategoryModalOpen(false);
-  };
-
-  const handleLinkCreate = async (data: any) => {
-    const { data: linkCreated } = await axios.post('/api/link', data);
-
-    setLink((oldValues) => [...oldValues, linkCreated]);
-    setAddLinkModalOpen(false);
-  };
+const Settings: FC = ({}) => {
+  const { openCreateCategoryModal, openCreateLinkModal } = useStore();
 
   return (
     <>
@@ -47,12 +20,12 @@ const Settings: FC<SettingsProps> = ({
               Categories
             </h1>
             <button
-              onClick={() => setAddCategoryModalOpen(true)}
+              onClick={openCreateCategoryModal}
               className="px-4 py-2 bg-slate-200 rounded-xl text-slate-500 text-semibold shadow-sm border hover:border-slate-300 transition duration-300 dark:border-slate-900 dark:hover:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
               Add category
             </button>
           </div>
-          <CategoryTable categories={categories} />
+          <CategoryTable />
         </section>
         <section>
           <div className="flex items-center justify-between">
@@ -60,26 +33,17 @@ const Settings: FC<SettingsProps> = ({
               Links
             </h1>
             <button
-              onClick={() => setAddLinkModalOpen(true)}
+              onClick={openCreateLinkModal}
               className="px-4 py-2 bg-slate-200 rounded-xl text-slate-500 text-semibold shadow-sm border hover:border-slate-300 transition duration-300 dark:border-slate-900 dark:hover:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
               Add link
             </button>
           </div>
-          <LinkTable links={links} />
+          <LinkTable />
         </section>
       </div>
 
-      <AddCategoryModal
-        isOpen={addCategoryModalOpen}
-        close={() => setAddCategoryModalOpen(false)}
-        submit={handleCategoryCreate}
-      />
-      <AddLinkModal
-        categories={categories}
-        isOpen={addLinkModalOpen}
-        close={() => setAddLinkModalOpen(false)}
-        submit={handleLinkCreate}
-      />
+      <AddCategoryModal />
+      <AddLinkModal />
     </>
   );
 };
@@ -104,8 +68,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      categories,
-      links,
+      initialState: { categories, links },
     },
   };
 };

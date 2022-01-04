@@ -1,21 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Category } from '@prisma/client';
 import { FC, Fragment, SyntheticEvent, useState } from 'react';
+import { useStore } from '../../lib/store';
 import { CategorySelectInput } from '../Inputs';
 
-interface AddLinkModalProps {
-  categories: Category[];
-  isOpen: boolean;
-  close: () => void;
-  submit: (data: any) => void;
-}
+interface AddLinkModalProps {}
 
-export const AddLinkModal: FC<AddLinkModalProps> = ({
-  isOpen,
-  close,
-  submit,
-  categories,
-}) => {
+export const AddLinkModal: FC<AddLinkModalProps> = ({}) => {
+  const { categories, modals, closeCreateLinkModal } = useStore();
+
   const [label, setLabel] = useState('');
   const [iconUrl, setIconUrl] = useState('');
   const [href, setHref] = useState('');
@@ -23,12 +16,12 @@ export const AddLinkModal: FC<AddLinkModalProps> = ({
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    submit({
-      label,
-      iconUrl,
-      href,
-      category: categorySelected.id,
-    });
+    // submit({
+    //   label,
+    //   iconUrl,
+    //   href,
+    //   category: categorySelected.id,
+    // });
     setLabel('');
     setIconUrl('');
     setHref('');
@@ -39,11 +32,11 @@ export const AddLinkModal: FC<AddLinkModalProps> = ({
 
   return (
     <>
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={modals.createLinkOpen} as={Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={close}>
+          onClose={closeCreateLinkModal}>
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={Fragment}
@@ -149,7 +142,7 @@ export const AddLinkModal: FC<AddLinkModalProps> = ({
                   <button
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-slate-900 bg-slate-100 border border-transparent rounded-md hover:bg-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-500"
-                    onClick={close}>
+                    onClick={closeCreateLinkModal}>
                     Cancel
                   </button>
                   <button

@@ -2,12 +2,13 @@ import { Category } from '@prisma/client';
 
 import { PencilIcon, TrashIcon } from '@heroicons/react/outline';
 import { FC } from 'react';
+import { useStore } from '../../lib/store';
 
-interface CategoryTableProps {
-  categories: Category[];
-}
+interface CategoryTableProps {}
 
-export const CategoryTable: FC<CategoryTableProps> = ({ categories }) => {
+export const CategoryTable: FC<CategoryTableProps> = () => {
+  const { categories } = useStore();
+
   return (
     <div className="mt-4">
       <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
