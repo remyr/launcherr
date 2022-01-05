@@ -38,7 +38,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <div className="w-full flex bg-white dark:bg-slate-800 py-4 p-4 shadow justify-between items-center xl:px-24">
+    <div className="w-full flex bg-white dark:bg-slate-800 p-4 shadow justify-between items-center xl:px-24">
       <Link href="/">
         <a className="text-3xl font-bold text-slate-800 dark:text-slate-100 hover:cursor-pointer">
           Launcherr

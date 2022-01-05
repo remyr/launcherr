@@ -1,3 +1,4 @@
+import { NoData } from '@component/Elements/NoData';
 import { Modal } from '@component/Modal';
 import { useStore } from '@lib/store';
 import axios from 'axios';
@@ -8,7 +9,7 @@ import { CategoryTable } from './CategoryTable';
 export const SettingsCategorySection = () => {
   const [removeConfirmModal, setRemoveConfirmModal] = useState(false);
   const [toRemove, setToRemove] = useState(null);
-  const { openCreateCategoryModal, removeCategory } = useStore();
+  const { openCreateCategoryModal, removeCategory, categories } = useStore();
 
   const handleRemove = (categoryId: number) => {
     setToRemove(categoryId);
@@ -33,7 +34,8 @@ export const SettingsCategorySection = () => {
           Add category
         </button>
       </div>
-      <CategoryTable remove={handleRemove} />
+      {categories.length > 0 && <CategoryTable remove={handleRemove} />}
+      {categories.length === 0 && <NoData />}
       <AddCategoryModal />
       <Modal
         title="Are you sure ?"

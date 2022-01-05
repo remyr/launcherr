@@ -1,9 +1,10 @@
+import { NoData } from '@component/Elements/NoData';
 import { useStore } from '@lib/store';
 import { AddLinkModal } from './AddLinkModal';
 import { LinkTable } from './LinkTable';
 
 export const SettingsLinkSection = () => {
-  const { openCreateLinkModal } = useStore();
+  const { openCreateLinkModal, links } = useStore();
 
   return (
     <section>
@@ -17,7 +18,8 @@ export const SettingsLinkSection = () => {
           Add link
         </button>
       </div>
-      <LinkTable />
+      {links.length > 0 && <LinkTable />}
+      {links.length === 0 && <NoData />}
       <AddLinkModal />
     </section>
   );

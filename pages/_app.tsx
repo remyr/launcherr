@@ -8,7 +8,9 @@ import { hydrateStore } from '../lib/store';
 import '../styles/index.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  hydrateStore({ ...pageProps.initialState });
+  if (pageProps.initialState) {
+    hydrateStore({ ...pageProps.initialState });
+  }
 
   return (
     <ThemeProvider attribute="class">
